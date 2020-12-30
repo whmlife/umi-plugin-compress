@@ -15,7 +15,7 @@
     "start": "cross-env APP_ROOT=example umi dev",
     "example:build": "cd ./example && umi build",
     "build": "father-build",
-    "postInstall": "node install.js",
+    "postinstall": "node install.js",
     "prepublishOnly": "npm run build && np --no-cleanup --yolo --no-publish"
   },
   "devDependencies": {
