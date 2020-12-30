@@ -1,10 +1,10 @@
 {
   "name": "umi-plugin-compress",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "",
   "authors": {
-    "name": "",
-    "email": ""
+    "name": "hmwang",
+    "email": "ihuiminwang@gmail.com "
   },
   "repository": "/umi-plugin-compress",
   "peerDependencies": {
