@@ -1,12 +1,12 @@
 {
   "name": "umi-plugin-compress",
-  "version": "1.0.1",
+  "version": "0.0.1",
   "description": "",
   "authors": {
     "name": "hmwang",
     "email": "ihuiminwang@gmail.com "
   },
-  "repository": "/umi-plugin-compress",
+  "repository": "https://github.com/whmlife/umi-plugin-compress.git",
   "peerDependencies": {
     "umi": "2.x || ^2.9.0-0"
   },
