@@ -1,5 +1,6 @@
 // ref:
 // - https://umijs.org/plugin/develop.htm
+import { execSync } from "child_process";
 import path from "path";
 
 function updateExternals(value) {
@@ -39,7 +40,19 @@ export default function(api, options) {
     return memo;
   });
 
+  api.registerCommand("generate-icons", () => {
+    execSync("npx gen-project-icons && npx generate-icons", {
+      stdio: "inherit"
+    });
+  });
+
+  const iconPath = path.resolve(cwd, "icon.js");
+
   api.chainWebpackConfig(webpackConfig => {
+    if (!webpackConfig) {
+      return;
+    }
+    webpackConfig.externals(updateExternals(options?.externals));
     webpackConfig.resolve.alias.set(
       "dayjs",
       compatDirname(
@@ -56,11 +69,8 @@ export default function(api, options) {
         preset: "antdv3"
       }
     ]);
-    webpackConfig.externals(updateExternals(options?.externals));
-    webpackConfig.resolve.alias.set(
-      "@ant-design/icons/lib/dist$",
-      path.resolve(cwd, "icon.js")
-    );
+
+    webpackConfig.resolve.alias.set("@ant-design/icons/lib/dist$", iconPath);
 
     return webpackConfig;
   });
