@@ -4,6 +4,9 @@ import path from "path";
 
 function updateExternals(value) {
   var newParams = {};
+  if (!value) {
+    return newParams;
+  }
   value.reduce((prev, next) => {
     newParams = Object.assign(newParams, { [`${next?.name}`]: next?.url });
   }, newParams);
@@ -53,7 +56,7 @@ export default function(api, options) {
         preset: "antdv3"
       }
     ]);
-    webpackConfig.externals(updateExternals(options.externals));
+    webpackConfig.externals(updateExternals(options?.externals));
     webpackConfig.resolve.alias.set(
       "@ant-design/icons/lib/dist$",
       path.resolve(cwd, "icon.js")
