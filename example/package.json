@@ -17,10 +17,11 @@
     "umi-types": ">= 0.4.0-beta.4"
   },
   "dependencies": {
-    "antd": "^3.26.18",
     "@ant-design/icons": "^2.1.1",
     "@antv/l7": "^2.2.32",
     "@antv/l7-maps": "^2.2.33",
-    "@antv/l7-react": "^2.2.32"
+    "@antv/l7-react": "^2.2.32",
+    "antd": "^3.26.18",
+    "lodash-es": "^4.17.20"
   }
 }

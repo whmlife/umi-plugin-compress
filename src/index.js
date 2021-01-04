@@ -54,14 +54,14 @@ export default function(api, options) {
       return;
     }
     webpackConfig.externals(updateExternals(options?.externals));
-    webpackConfig.resolve.alias.set(
-      "dayjs",
-      compatDirname(
-        "dayjs/package.json",
-        cwd,
-        path.dirname(require.resolve("dayjs/package.json"))
-      )
-    );
+    // webpackConfig.resolve.alias.set(
+    //   "dayjs",
+    //   compatDirname(
+    //     "dayjs/package.json",
+    //     cwd,
+    //     path.dirname(require.resolve("dayjs/package.json"))
+    //   )
+    // );
     webpackConfig
       .plugin("lodash")
       .use("lodash-webpack-plugin", [{ paths: true }]);
@@ -73,6 +73,7 @@ export default function(api, options) {
 
     webpackConfig.resolve.alias.set("@ant-design/icons/lib/dist$", iconPath);
     webpackConfig.resolve.alias.set("lodash", "lodash-es");
+    webpackConfig.resolve.alias.set("moment/locale", "dayjs/locale");
 
     return webpackConfig;
   });
