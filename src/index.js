@@ -4,14 +4,15 @@ import { execSync } from "child_process";
 import path from "path";
 
 function updateExternals(value) {
-  var newParams = {};
-  if (!value) {
-    return newParams;
+  if (!value || !Array.isArray(value) || value.length === 0) {
+    return {};
   }
-  value.reduce((prev, next) => {
-    newParams = Object.assign(newParams, { [`${next?.name}`]: next?.url });
-  }, newParams);
-  return newParams;
+  return value.map(v => {
+    const { pkgName, name } = v;
+    return {
+      [pkgName]: `window.${name}`
+    };
+  });
 }
 
 export default function(api, options) {
@@ -71,6 +72,7 @@ export default function(api, options) {
     ]);
 
     webpackConfig.resolve.alias.set("@ant-design/icons/lib/dist$", iconPath);
+    webpackConfig.resolve.alias.set("lodash", "lodash-es");
 
     return webpackConfig;
   });
