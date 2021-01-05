@@ -7,12 +7,11 @@ function updateExternals(value) {
   if (!value || !Array.isArray(value) || value.length === 0) {
     return {};
   }
-  return value.map(v => {
-    const { pkgName, name } = v;
-    return {
-      [pkgName]: `window.${name}`
-    };
-  });
+  return value.reduce((prev, next) => {
+    const { pkgName, name } = next;
+    prev[pkgName] = `window.${name}`;
+    return prev;
+  }, {});
 }
 
 export default function(api, options) {
@@ -49,11 +48,15 @@ export default function(api, options) {
 
   const iconPath = path.resolve(cwd, "icon.js");
 
+  const externals = updateExternals(options?.externals);
+  console.log("====================================");
+  console.log(externals);
+  console.log("====================================");
   api.chainWebpackConfig(webpackConfig => {
     if (!webpackConfig) {
       return;
     }
-    webpackConfig.externals(updateExternals(options?.externals));
+    webpackConfig.externals(externals);
     // webpackConfig.resolve.alias.set(
     //   "dayjs",
     //   compatDirname(
