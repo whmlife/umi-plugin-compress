@@ -20,7 +20,8 @@ export default {
             url:
               "https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js"
           }
-        ]
+        ],
+        antdIcon: false
       }
     ]
   ]
