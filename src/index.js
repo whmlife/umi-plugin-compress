@@ -56,17 +56,16 @@ export default function(api, options) {
     });
   });
 
-  const iconPath = path.resolve(cwd, "icon.js");
-
   console.log("====================================");
   console.log(options, moment, lodash, antdIcon);
   console.log("====================================");
+  if (!externals && !moment && !lodash && !antdIcon) {
+    return;
+  }
 
+  const iconPath = path.resolve(cwd, "icon.js");
   const externals = updateExternals(options?.externals);
   api.chainWebpackConfig(webpackConfig => {
-    if (!webpackConfig) {
-      return;
-    }
     console.log("====================================");
     console.log(externals, "--- externals");
     console.log("====================================");
