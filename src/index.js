@@ -1,5 +1,6 @@
 // ref:
 // - https://umijs.org/plugin/develop.htm
+// import { IApi } from "umi-types";
 import { execSync } from "child_process";
 import path from "path";
 
@@ -14,6 +15,11 @@ function updateExternals(value) {
   }, {});
 }
 
+/**
+ *
+ * @param {IApi} api
+ * @param {*} options
+ */
 export default function(api, options) {
   const { cwd, compatDirname } = api;
   // 用来自动配置外部script
@@ -22,6 +28,18 @@ export default function(api, options) {
       content: v?.name,
       src: v?.url
     });
+  });
+  const parsedExternals = updateExternals(options?.externals);
+  console.log(parsedExternals, "--- externals");
+  api.modifyDefaultConfig(memo => {
+    const { externals = {} } = memo;
+    return {
+      ...memo,
+      externals: {
+        ...parsedExternals,
+        ...externals
+      }
+    };
   });
 
   api.modifyAFWebpackOpts(memo => {
@@ -48,23 +66,22 @@ export default function(api, options) {
 
   const iconPath = path.resolve(cwd, "icon.js");
 
-  const externals = updateExternals(options?.externals);
-  console.log("====================================");
-  console.log(externals);
-  console.log("====================================");
   api.chainWebpackConfig(webpackConfig => {
     if (!webpackConfig) {
       return;
     }
-    webpackConfig.externals(externals);
-    // webpackConfig.resolve.alias.set(
-    //   "dayjs",
-    //   compatDirname(
-    //     "dayjs/package.json",
-    //     cwd,
-    //     path.dirname(require.resolve("dayjs/package.json"))
-    //   )
-    // );
+    console.log("====================================");
+    console.log(JSON.stringify(webpackConfig.externals), "--- externals");
+    console.log("====================================");
+    // webpackConfig.externals(externals);
+    webpackConfig.resolve.alias.set(
+      "dayjs",
+      compatDirname(
+        "dayjs/package.json",
+        cwd,
+        path.dirname(require.resolve("dayjs/package.json"))
+      )
+    );
     webpackConfig
       .plugin("lodash")
       .use("lodash-webpack-plugin", [{ paths: true }]);
