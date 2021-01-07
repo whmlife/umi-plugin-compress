@@ -10,7 +10,7 @@ function updateExternals(value) {
   }
   return value.reduce((prev, next) => {
     const { pkgName, name } = next;
-    prev[pkgName] = `window.${name}`;
+    prev[pkgName] = `${name}`;
     return prev;
   }, {});
 }
@@ -28,18 +28,6 @@ export default function(api, options) {
       content: v?.name,
       src: v?.url
     });
-  });
-  const parsedExternals = updateExternals(options?.externals);
-  console.log(parsedExternals, "--- externals");
-  api.modifyDefaultConfig(memo => {
-    const { externals = {} } = memo;
-    return {
-      ...memo,
-      externals: {
-        ...parsedExternals,
-        ...externals
-      }
-    };
   });
 
   api.modifyAFWebpackOpts(memo => {
@@ -66,14 +54,15 @@ export default function(api, options) {
 
   const iconPath = path.resolve(cwd, "icon.js");
 
+  const externals = updateExternals(options?.externals);
   api.chainWebpackConfig(webpackConfig => {
     if (!webpackConfig) {
       return;
     }
     console.log("====================================");
-    console.log(JSON.stringify(webpackConfig.externals), "--- externals");
+    console.log(externals, "--- externals");
     console.log("====================================");
-    // webpackConfig.externals(externals);
+    webpackConfig.externals(externals);
     webpackConfig.resolve.alias.set(
       "dayjs",
       compatDirname(
