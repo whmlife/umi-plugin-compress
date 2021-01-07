@@ -23,7 +23,7 @@ function updateExternals(value) {
 export default function(api, options) {
   const { cwd, compatDirname } = api;
 
-  const { lodash = true, moment = true, antdIcon = true } = options;
+  const { lodash = true, moment = true, antdIcon = true, l7 = false } = options;
   // 用来自动配置外部script
   options?.externals?.map(v => {
     return api.addHTMLHeadScript({
@@ -32,21 +32,23 @@ export default function(api, options) {
     });
   });
 
-  api.modifyAFWebpackOpts(memo => {
-    memo.extraBabelPlugins = [
-      ...(memo.extraBabelPlugins || []),
-      [
-        require.resolve("babel-plugin-import"),
-        {
-          libraryName: "@antv/l7-react",
-          libraryDirectory: "es/component",
-          camel2DashComponentName: false
-        },
-        "@antv/l7-react"
-      ]
-    ];
-    return memo;
-  });
+  if (l7) {
+    api.modifyAFWebpackOpts(memo => {
+      memo.extraBabelPlugins = [
+        ...(memo.extraBabelPlugins || []),
+        [
+          require.resolve("babel-plugin-import"),
+          {
+            libraryName: "@antv/l7-react",
+            libraryDirectory: "es/component",
+            camel2DashComponentName: false
+          },
+          "@antv/l7-react"
+        ]
+      ];
+      return memo;
+    });
+  }
 
   api.registerCommand("generate-icons", () => {
     execSync("npx gen-project-icons && npx generate-icons", {
