@@ -97,7 +97,7 @@ export default function(api, options) {
     }
 
     if (antdIcon) {
-      webpackConfig.resolve.alias.set("@ant-design/icons/lib/dist$", iconPath);
+      webpackConfig.resolve.alias.set("@ant-design/icons$", iconPath);
     }
 
     return webpackConfig;
