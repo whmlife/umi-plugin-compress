@@ -51,7 +51,11 @@ export default function(api, options) {
   }
 
   api.registerCommand("generate-icons", () => {
-    execSync("npx gen-project-icons && npx generate-icons", {
+    execSync("npx gen-project-icons", {
+      cwd: path.resolve(cwd, "src"),
+      stdio: "inherit"
+    });
+    execSync("npx generate-icons", {
       stdio: "inherit"
     });
   });
