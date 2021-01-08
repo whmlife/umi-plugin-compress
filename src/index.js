@@ -1,6 +1,6 @@
 // ref:
 // - https://umijs.org/plugin/develop.htm
-// import { IApi } from "umi-types";
+import { IApi } from "umi-types";
 import { execSync } from "child_process";
 import path from "path";
 
@@ -51,18 +51,17 @@ export default function(api, options) {
   }
 
   api.registerCommand("generate-icons", () => {
-    execSync("npx gen-project-icons", {
-      cwd: path.resolve(cwd, "src"),
-      stdio: "inherit"
-    });
-    execSync("npx generate-icons", {
-      stdio: "inherit"
-    });
+    generateIcons(cwd);
   });
 
-  console.log("====================================");
-  console.log(options, moment, lodash, antdIcon);
-  console.log("====================================");
+  api.onStart(() => {
+    // TODO: 检查是否有涉及到icon的修改
+    const gitDiff = execSync("git diff", { encoding: "utf-8" });
+    if (gitDiff.includes("Icon")) {
+      generateIcons(cwd);
+    }
+  });
+
   if (!externals && !moment && !lodash && !antdIcon) {
     return;
   }
@@ -105,5 +104,14 @@ export default function(api, options) {
     }
 
     return webpackConfig;
+  });
+}
+function generateIcons(cwd) {
+  execSync("npx gen-project-icons", {
+    cwd: path.resolve(cwd, "src"),
+    stdio: "inherit"
+  });
+  execSync("npx generate-icons", {
+    stdio: "inherit"
   });
 }
