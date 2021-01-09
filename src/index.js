@@ -1,6 +1,6 @@
 // ref:
 // - https://umijs.org/plugin/develop.htm
-import { IApi } from "umi-types";
+// import { IApi } from "umi-types";
 import { execSync } from "child_process";
 import path from "path";
 
@@ -57,7 +57,7 @@ export default function(api, options) {
   api.onStart(() => {
     // TODO: 检查是否有涉及到icon的修改
     const gitDiff = execSync("git diff", { encoding: "utf-8" });
-    if (gitDiff.includes("Icon")) {
+    if (gitDiff.includes("Icon") || gitDiff.includes("icon")) {
       generateIcons(cwd);
     }
   });
