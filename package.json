@@ -34,7 +34,7 @@
     "antd-dayjs-webpack-plugin": "1.0.4",
     "babel-plugin-import": "^1.13.3",
     "dayjs": "1.10.2",
-    "icon-export-generator": "^1.0.1",
+    "icon-export-generator": "^1.0.3",
     "lodash-es": "^4.17.20",
     "lodash-webpack-plugin": "0.11.6"
   }
