@@ -56,6 +56,9 @@ export default function(api, options) {
 
   api.onStart(() => {
     // TODO: 检查是否有涉及到icon的修改
+    if (process.env.NODE_ENV === "production") {
+      return;
+    }
     const gitDiff = execSync("git diff", { encoding: "utf-8" });
     if (gitDiff.includes("Icon") || gitDiff.includes("icon")) {
       generateIcons(cwd);
