@@ -3,6 +3,8 @@
 [![NPM version](https://img.shields.io/npm/v/umi-plugin-bundle-compress.svg?style=flat)](https://www.npmjs.com/package/umi-plugin-bundle-compress)
 [![NPM downloads](http://img.shields.io/npm/dm/umi-plugin-bundle-compress.svg?style=flat)](https://www.npmjs.com/package/umi-plugin-bundle-compress)
 
+compress project bundle
+
 ## Install
 
 ```bash
@@ -39,16 +41,16 @@ export default {
             pkgName: "react",
             //  加载外部script的url
             url:
-              "https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js"
-          }
+              "https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js",
+          },
         ],
         l7: false, // 是否需要压缩@antv/l7-react，默认为false, 不开启
         lodash: true, // 是否需要压缩lodash，默认为true
         moment: true, // 是否需要压缩moment(替换为dayjs)，默认为true
-        antdIcon: true // 是否需要替换替换 antd3 对于 icon 的引用，默认为true
-      }
-    ]
-  ]
+        antdIcon: true, // 是否需要替换替换 antd3 对于 icon 的引用，默认为true
+      },
+    ],
+  ],
 };
 ```
 
