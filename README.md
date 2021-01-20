@@ -42,15 +42,20 @@ export default {
               "https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js"
           }
         ],
-        l7: false, // 是否需要定义额外的@antv/l7-react，默认为false, 不开启
-        lodash: true, // 是否需要压缩lodash插件同时换成es导出，默认为true
-        moment: true, // 是否需要替换为dayjs同时压缩dayjs插件，默认为true
-        antdIcon: true // 是否需要替换替换 antd 对于 icon 的引用，默认为true
+        l7: false, // 是否需要压缩@antv/l7-react，默认为false, 不开启
+        lodash: true, // 是否需要压缩lodash，默认为true
+        moment: true, // 是否需要压缩moment(替换为dayjs)，默认为true
+        antdIcon: true // 是否需要替换替换 antd3 对于 icon 的引用，默认为true
       }
     ]
   ]
 };
 ```
+
+### 如果遇到问题或者需要支持新的功能, 欢迎向我们提出 issue, 以及需要支持的新特性; 欢迎 PR
+
+[Issues](https://github.com/whmlife/umi-plugin-compress/issues)
+[Pull Requests](https://github.com/whmlife/umi-plugin-compress/pulls)
 
 ## LICENSE
 
