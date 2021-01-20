@@ -1,13 +1,13 @@
 # umi-plugin-bundle-compress
 
-[![NPM version](https://img.shields.io/npm/v/umi-plugin-compress.svg?style=flat)](https://www.npmjs.com/package/umi-plugin-bundle-compress)
-[![NPM downloads](http://img.shields.io/npm/dm/umi-plugin-compress.svg?style=flat)](https://www.npmjs.com/package/umi-plugin-bundle-compress)
+[![NPM version](https://img.shields.io/npm/v/umi-plugin-bundle-compress.svg?style=flat)](https://www.npmjs.com/package/umi-plugin-bundle-compress)
+[![NPM downloads](http://img.shields.io/npm/dm/umi-plugin-bundle-compress.svg?style=flat)](https://www.npmjs.com/package/umi-plugin-bundle-compress)
 
 ## Install
 
 ```bash
-# or yarn
-$ npm install umi-plugin-bundle-compress
+# or yarn add -D umi-plugin-bundle-compress
+$ npm install umi-plugin-bundle-compress --save --dev
 ```
 
 这个 umi 插件目的是为了帮助开发者缩小项目打包体积，下面是缩小项目包体积的具体内容：
@@ -55,6 +55,7 @@ export default {
 ### 如果遇到问题或者需要支持新的功能, 欢迎向我们提出 issue, 以及需要支持的新特性; 欢迎 PR
 
 [Issues](https://github.com/whmlife/umi-plugin-compress/issues)
+
 [Pull Requests](https://github.com/whmlife/umi-plugin-compress/pulls)
 
 ## LICENSE
